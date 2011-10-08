@@ -1,0 +1,5 @@
+/lib*-java.substvars
+/lib*-java.debhelper.log
+/lib*-java/
+
+/files
