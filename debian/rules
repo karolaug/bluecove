@@ -14,17 +14,25 @@ DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' '
 DEB_NOEPOCH_VERSION := $(shell echo $(DEB_VERSION) | cut -d: -f2-)
 DEB_UPSTREAM_VERSION := $(shell echo $(DEB_VERSION) | sed 's/-[^-]*$$//')
 
+DEB_MAVEN_REPO = $(CURDIR)/debian/maven-repo
+
+mvn = mvn $(mvnflags)
+mvnflags = -Dmaven.repo.local=$(DEB_MAVEN_REPO)
+# -o is off, this is not a real debian package
+copy_repo = /usr/share/maven-debian-helper/copy-repo.sh
+
 %:
-	dh $@ --buildsystem ant
+	dh $@
+
+override_dh_auto_configure:
+	$(copy_repo) debian/
 
 override_dh_auto_build:
-	ant jar
-	mv target/bluecove-*-SNAPSHOT.jar target/$(DEB_SOURCE_PACKAGE)-$(DEB_UPSTREAM_VERSION).jar
+	$(mvn) package
 
 override_dh_install:
-	dh_install -plib$(DEB_SOURCE_PACKAGE)-java \
-		target/$(DEB_SOURCE_PACKAGE)-$(DEB_UPSTREAM_VERSION).jar\
-		usr/share/java/
-	dh_link -plib$(DEB_SOURCE_PACKAGE)-java \
-		usr/share/java/$(DEB_SOURCE_PACKAGE)-$(DEB_UPSTREAM_VERSION).jar \
-		usr/share/java/$(DEB_SOURCE_PACKAGE).jar
+	mh_install -v
+
+override_dh_auto_clean:
+	$(mvn) clean
+	rm -rf $(DEB_MAVEN_REPO)

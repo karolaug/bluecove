@@ -1,0 +1,6 @@
+pom.xml --has-package-version
+bluecove/pom.xml --has-package-version --java-lib --artifact=bluecove/target/bluecove-2.1.1-SNAPSHOT.jar
+bluecove-emu/pom.xml --has-package-version --java-lib --artifact=bluecove-emu/target/bluecove-emu-2.1.1-SNAPSHOT.jar
+bluecove-emu-gui/pom.xml --has-package-version --java-lib --artifact=bluecove-emu-gui/target/bluecove-emu-gui-2.1.1-SNAPSHOT.jar
+bluecove-gpl/pom.xml --has-package-version --java-lib --artifact=bluecove-gpl/target/bluecove-gpl-2.1.1-SNAPSHOT.jar
+bluecove-bluez/pom.xml --has-package-version --java-lib --artifact=bluecove-bluez/target/bluecove-bluez-2.1.1-SNAPSHOT.jar
