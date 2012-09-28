@@ -17,7 +17,7 @@ DEB_UPSTREAM_VERSION := $(shell echo $(DEB_VERSION) | sed 's/-[^-]*$$//')
 DEB_MAVEN_REPO = $(CURDIR)/debian/maven-repo
 
 mvn = mvn $(mvnflags)
-mvnflags = -Dmaven.repo.local=$(DEB_MAVEN_REPO)
+mvnflags = -Dmaven.repo.local=$(DEB_MAVEN_REPO) -Dmaven.test.skip=true
 # -o is off, this is not a real debian package
 copy_repo = /usr/share/maven-debian-helper/copy-repo.sh
 
