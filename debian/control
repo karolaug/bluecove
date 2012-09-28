@@ -11,4 +11,4 @@ Vcs-Browser: http://escher.fuw.edu.pl/git/bluecove-parent
 Package: libbluecove-java
 Architecture: all
 Depends: ${misc:Depends}
-Description: Java library to read matlab files
+Description: Java library for Bluetooth (JSR-82 implementation).
